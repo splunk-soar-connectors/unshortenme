@@ -7,7 +7,7 @@
   "main_module": "unshortenme_connector.pyc",
   "app_version": "1.0.0",
   "utctime_updated": "2017-06-06T02:12:43.000000Z",
-  "package_name": "unshorten.me",
+  "package_name": "phantom_unshortenme",
   "product_vendor": "unshorten.me",
   "product_name": "Un-Shorten API",
   "product_version_regex": ".*",
