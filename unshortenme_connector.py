@@ -75,7 +75,7 @@ class UnshortenmeConnector(BaseConnector):
             message = 'API returned error: {0}'.format(data['error'])
             return action_result.set_status(phantom.APP_ERROR, message), data
 
-        return action_result.set_status(phantom.APP_SUCCESS), data
+        return phantom.APP_SUCCESS, data
 
     def _test_connectivity(self, param):
         action_result = self.add_action_result(ActionResult(param))
@@ -86,6 +86,9 @@ class UnshortenmeConnector(BaseConnector):
         ret_val, data = self._make_rest_call(action_result, url)
 
         if phantom.is_fail(ret_val):
+            message = ('Test Connetivity failed. '
+                       'Error: {0}'.format(action_result.get_message()))
+            self.save_progress(message)
             return action_result.get_status()
 
         # Sanity check
@@ -109,7 +112,9 @@ class UnshortenmeConnector(BaseConnector):
 
         if data is not None:
             action_result.add_data(data)
-        return action_result.get_status()
+        if phantom.is_fail(ret_val):
+            return action_result.get_status()
+        return action_result.set_status(phantom.APP_SUCCESS)
 
     def handle_action(self, param):
         """Function that handles all the actions
