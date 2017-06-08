@@ -49,14 +49,14 @@ class UnshortenmeConnector(BaseConnector):
                     None)
 
         content_type = res.headers.get('Content-Type', '')
-        if 'html' not in content_type:
+        if 'html' not in content_type and 'json' not in content_type:
             # this API always returns text/html even with a JSON response
             res_text = res.text.replace('{', '{{').replace('}', '}}')
             message = 'Unexpected response from server: {0}'.format(res_text)
             return action_result.set_status(phantom.APP_ERROR, message), None
 
         try:
-            return phantom.APP_SUCCESS, res.json()
+            data = res.json()
         except ValueError as e:
             try:
                 soup = BeautifulSoup(res.test, 'html.parser')
@@ -71,6 +71,12 @@ class UnshortenmeConnector(BaseConnector):
                        'Response: \n{1}\n').format(res.status_code, error_text)
             return action_result.set_status(phantom.APP_ERROR, message), None
 
+        if 'error' in data:
+            message = 'API returned error: {0}'.format(data['error'])
+            return action_result.set_status(phantom.APP_ERROR, message), data
+
+        return action_result.set_status(phantom.APP_SUCCESS), data
+
     def _test_connectivity(self, param):
         action_result = self.add_action_result(ActionResult(param))
 
@@ -78,21 +84,19 @@ class UnshortenmeConnector(BaseConnector):
 
         # Connect to the server
         ret_val, data = self._make_rest_call(action_result, url)
+
         if phantom.is_fail(ret_val):
-            return self.set_status_save_progress(phantom.APP_ERROR,
-                                                 'Connection Failed.')
-        if 'error' in data:
-            return self.set_status_save_progress(phantom.APP_ERROR,
-                                                 'Error returned by API {}'
-                                                 .format(data['error']))
+            return action_result.get_status()
+
+        # Sanity check
         if data.get('resolved_url') != 'https://unshorten.me/':
-            return self.set_status_save_progress(phantom.APP_ERROR,
-                                                 'API returned invalid data.')
+            message = 'API returned invalid data.'
+            return self.set_status_save_progress(phantom.APP_ERROR, message)
 
-        return self.set_status_save_progress(phantom.APP_SUCCESS,
-                                             'Connection successful.')
+        message = 'Connection seccessful.'
+        return self.set_status_save_progress(phantom.APP_SUCCESS, message)
 
-    def unshorten_url(self, param):
+    def _unshorten_url(self, param):
         action_result = self.add_action_result(ActionResult(param))
         url = param.get('url')
 
@@ -102,11 +106,10 @@ class UnshortenmeConnector(BaseConnector):
             url = url[8:]
 
         ret_val, data = self._make_rest_call(action_result, url)
-        if phantom.is_fail(ret_val):
-            return action_result.get_status()
 
-        action_result.add_data(data)
-        return action_result.set_status(phantom.APP_SUCCESS)
+        if data is not None:
+            action_result.add_data(data)
+        return action_result.get_status()
 
     def handle_action(self, param):
         """Function that handles all the actions
@@ -123,5 +126,5 @@ class UnshortenmeConnector(BaseConnector):
         if action == phantom.ACTION_ID_TEST_ASSET_CONNECTIVITY:
             result = self._test_connectivity(param)
         elif action == 'unshorten_url':
-            result = self.unshorten_url(param)
+            result = self._unshorten_url(param)
         return result
