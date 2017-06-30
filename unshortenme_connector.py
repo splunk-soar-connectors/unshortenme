@@ -1,4 +1,3 @@
-
 # --
 # File: proofpoint_connector.py
 #
@@ -12,16 +11,24 @@
 # of Phantom Cyber.
 #
 # --
-
 # Phantom imports
-import phantom.app as phantom
 
-import requests
-from bs4 import BeautifulSoup
-from HTMLParser import HTMLParseError
+# The following is a stop gap solution for the app to load the proper version of the ffi so
+# The next version of the platform should fix this
+try:
+    from ctypes import *
+    cdll.LoadLibrary('/usr/lib64/python2.7/site-packages/.libs_cffi_backend/libffi-72499c49.so.6.0.4')
+except:
+    pass
 
-from phantom.base_connector import BaseConnector
-from phantom.action_result import ActionResult
+import phantom.app as phantom  # noqa
+
+import requests  # noqa
+from bs4 import BeautifulSoup  # noqa
+from HTMLParser import HTMLParseError  # noqa
+
+from phantom.base_connector import BaseConnector  # noqa
+from phantom.action_result import ActionResult  # noqa
 
 requests.packages.urllib3.disable_warnings()
 
@@ -29,7 +36,9 @@ UNSHORTEN_ME_BASE_URL = 'https://unshorten.me/json/'
 
 
 class UnshortenmeConnector(BaseConnector):
+
     def _make_rest_call(self, action_result, endpoint, params=None):
+
         url = UNSHORTEN_ME_BASE_URL + endpoint
         if not params:
             params = {}
@@ -78,9 +87,12 @@ class UnshortenmeConnector(BaseConnector):
         return phantom.APP_SUCCESS, data
 
     def _test_connectivity(self, param):
+
         action_result = self.add_action_result(ActionResult(param))
 
         url = 'goo.gl/IGL1lE'
+
+        self.save_progress("Connecting to {0} to test connectivity".format(UNSHORTEN_ME_BASE_URL))
 
         # Connect to the server
         ret_val, data = self._make_rest_call(action_result, url)
@@ -133,3 +145,25 @@ class UnshortenmeConnector(BaseConnector):
         elif action == 'unshorten_url':
             result = self._unshorten_url(param)
         return result
+
+
+if __name__ == '__main__':
+
+    import sys
+    import pudb
+    import json
+
+    pudb.set_trace()
+
+    with open(sys.argv[1]) as f:
+        in_json = f.read()
+        in_json = json.loads(in_json)
+        print(json.dumps(in_json, indent=4))
+
+        connector = UnshortenmeConnector()
+        connector.print_progress_message = True
+        result = connector._handle_action(json.dumps(in_json), None)
+
+        print result
+
+    exit(0)
