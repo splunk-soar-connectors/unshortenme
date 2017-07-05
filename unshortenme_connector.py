@@ -16,7 +16,7 @@
 # The following is a stop gap solution for the app to load the proper version of the ffi so
 # The next version of the platform should fix this
 try:
-    from ctypes import *
+    from ctypes import cdll
     cdll.LoadLibrary('/usr/lib64/python2.7/site-packages/.libs_cffi_backend/libffi-72499c49.so.6.0.4')
 except:
     pass
@@ -30,7 +30,7 @@ from HTMLParser import HTMLParseError  # noqa
 from phantom.base_connector import BaseConnector  # noqa
 from phantom.action_result import ActionResult  # noqa
 
-requests.packages.urllib3.disable_warnings()
+requests.packages.urllib3.disable_warnings()  # pylint: disable=E1101
 
 UNSHORTEN_ME_BASE_URL = 'https://unshorten.me/json/'
 
