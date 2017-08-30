@@ -29,7 +29,7 @@
       "versions": "EQ(*)"
     },
     {
-      "action": "unshorten url",
+      "action": "lookup url",
       "description": "Get original URL from one provided from a shortening service",
       "type": "investigate",
       "identifier": "unshorten_url",
