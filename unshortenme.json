@@ -28,7 +28,7 @@
     },
     {
       "action": "lookup url",
-      "description": "Get original URL from one provided from a shortening service",
+      "description": "Get the original URL from a shortened URL",
       "type": "investigate",
       "identifier": "unshorten_url",
       "read_only": true,
@@ -93,6 +93,14 @@
           "contains": [
             "url"
           ]
+        },
+        {
+          "data_path": "summary.total_objects",
+          "data_type": "numeric"
+        },
+        {
+          "data_path": "summary.total_objects_successful",
+          "data_type": "numeric"
         }
       ],
       "versions": "EQ(*)"
