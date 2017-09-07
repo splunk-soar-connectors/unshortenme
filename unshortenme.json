@@ -1,7 +1,7 @@
 {
   "appid": "bd516f25-6b30-4ac9-afdf-178c576d1921",
   "name": "unshorten.me",
-  "description": "This app supports unshortening various URLs via the unshorten.me API",
+  "description": "This app integrates with the unshorten.me service to expand shortened URLs",
   "type": "information",
   "publisher": "Phantom",
   "main_module": "unshortenme_connector.pyc",
