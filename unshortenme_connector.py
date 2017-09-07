@@ -1,5 +1,5 @@
 # --
-# File: proofpoint_connector.py
+# File: unshortenme_connector.py
 #
 # Copyright (c) Phantom Cyber Corporation, 2017
 #
@@ -97,7 +97,7 @@ class UnshortenmeConnector(BaseConnector):
             message = 'API returned invalid data.'
             return self.set_status_save_progress(phantom.APP_ERROR, message)
 
-        message = 'Connection seccessful.'
+        message = 'Connection successful.'
         return self.set_status_save_progress(phantom.APP_SUCCESS, message)
 
     def _unshorten_url(self, param):
