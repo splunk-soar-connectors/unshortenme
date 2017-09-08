@@ -1,5 +1,5 @@
 # --
-# File: proofpoint_connector.py
+# File: unshortenme_connector.py
 #
 # Copyright (c) Phantom Cyber Corporation, 2017
 #
@@ -12,15 +12,6 @@
 #
 # --
 # Phantom imports
-
-# The following is a stop gap solution for the app to load the proper version of the ffi so
-# The next version of the platform should fix this
-try:
-    from ctypes import cdll
-    cdll.LoadLibrary('/usr/lib64/python2.7/site-packages/.libs_cffi_backend/libffi-72499c49.so.6.0.4')
-except:
-    pass
-
 import phantom.app as phantom  # noqa
 
 import requests  # noqa
@@ -29,8 +20,6 @@ from HTMLParser import HTMLParseError  # noqa
 
 from phantom.base_connector import BaseConnector  # noqa
 from phantom.action_result import ActionResult  # noqa
-
-requests.packages.urllib3.disable_warnings()  # pylint: disable=E1101
 
 UNSHORTEN_ME_BASE_URL = 'https://unshorten.me/json/'
 
@@ -108,7 +97,7 @@ class UnshortenmeConnector(BaseConnector):
             message = 'API returned invalid data.'
             return self.set_status_save_progress(phantom.APP_ERROR, message)
 
-        message = 'Connection seccessful.'
+        message = 'Connection successful.'
         return self.set_status_save_progress(phantom.APP_SUCCESS, message)
 
     def _unshorten_url(self, param):
