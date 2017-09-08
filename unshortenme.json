@@ -5,7 +5,7 @@
   "type": "information",
   "publisher": "Phantom",
   "main_module": "unshortenme_connector.pyc",
-  "app_version": "1.0.3",
+  "app_version": "1.0.4",
   "utctime_updated": "2017-09-07T23:29:02.000000Z",
   "package_name": "phantom_unshortenme",
   "product_vendor": "Unshorten.me",
