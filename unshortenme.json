@@ -14,7 +14,7 @@
     "min_phantom_version": "3.0.247",
     "logo": "logo_unshortenme.svg",
     "logo_dark": "logo_unshortenme_dark.svg",
-    "license": "Copyright (c) Phantom Cyber Corporation 2017",
+    "license": "Copyright (c) Phantom Cyber Corporation, 2017-2018",
     "configuration": {},
     "actions": [
         {
