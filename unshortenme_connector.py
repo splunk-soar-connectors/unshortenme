@@ -1,22 +1,13 @@
-# --
-# File: unshortenme_connector.py
+# File: preempt_connector.py
+# Copyright (c) 2017-2021 Splunk Inc.
 #
-# Copyright (c) Phantom Cyber Corporation, 2017-2018
-#
-# This unpublished material is proprietary to Phantom Cyber.
-# All rights reserved. The methods and
-# techniques described herein are considered trade secrets
-# and/or confidential. Reproduction or distribution, in whole
-# or in part, is forbidden except by express written permission
-# of Phantom Cyber.
-#
-# --
-# Phantom imports
+# SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
+# without a valid written license from Splunk Inc. is PROHIBITED.
+
 import phantom.app as phantom  # noqa
 
 import requests  # noqa
 from bs4 import BeautifulSoup  # noqa
-from HTMLParser import HTMLParseError  # noqa
 
 from phantom.base_connector import BaseConnector  # noqa
 from phantom.action_result import ActionResult  # noqa
@@ -58,11 +49,14 @@ class UnshortenmeConnector(BaseConnector):
         except ValueError as e:
             try:
                 soup = BeautifulSoup(res.test, 'html.parser')
+                # Remove the script, style, footer and navigation part from the HTML message
+                for element in soup(["script", "style", "footer", "nav"]):
+                    element.extract()
                 error_text = soup.text
                 split_lines = error_text.splitlines()
                 split_lines = [x.strip() for x in split_lines if x.strip()]
                 error_text = '\n'.join(split_lines)
-            except HTMLParseError as e:
+            except Exception as e:
                 error_text = 'Cannot parse error details: {}'.format(e.msg)
 
             message = ('Error response from server. Status code: {0}'
@@ -153,6 +147,6 @@ if __name__ == '__main__':
         connector.print_progress_message = True
         result = connector._handle_action(json.dumps(in_json), None)
 
-        print result
+        print(result)
 
     exit(0)
