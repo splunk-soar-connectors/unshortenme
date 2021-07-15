@@ -1,4 +1,4 @@
-# File: preempt_connector.py
+# File: unshortenme_connector.py
 # Copyright (c) 2017-2021 Splunk Inc.
 #
 # SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
