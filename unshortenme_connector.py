@@ -58,7 +58,8 @@ class UnshortenmeConnector(BaseConnector):
             except Exception as e:
                 error_text = 'Cannot parse error details: {}'.format(e.msg)
 
-            message = 'Error response from server. Status code: {0} Response: \n{1}\n'.format(res.status_code, error_text)
+            message =  ('Error response from server. Status code: {0}'
+                       'Response: \n{1}\n').format(res.status_code, error_text)
             return action_result.set_status(phantom.APP_ERROR, message), None
 
         if 'error' in data:
