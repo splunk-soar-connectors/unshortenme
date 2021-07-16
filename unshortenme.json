@@ -14,7 +14,7 @@
     "min_phantom_version": "4.9.39220",
     "python_version": "3",
     "latest_tested_versions": [
-        "tested on 15st July, 2021"
+        "Cloud, Tested on 16th July, 2021"
     ],
     "logo": "logo_unshortenme.svg",
     "logo_dark": "logo_unshortenme_dark.svg",
@@ -121,10 +121,7 @@
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string",
-                    "example_values": [
-                        ""
-                    ]
+                    "data_type": "string"
                 }
             ],
             "versions": "EQ(*)"

@@ -46,9 +46,9 @@ class UnshortenmeConnector(BaseConnector):
 
         try:
             data = res.json()
-        except ValueError as e:
+        except ValueError:
             try:
-                soup = BeautifulSoup(res.test, 'html.parser')
+                soup = BeautifulSoup(res.text, 'html.parser')
                 # Remove the script, style, footer and navigation part from the HTML message
                 for element in soup(["script", "style", "footer", "nav"]):
                     element.extract()
@@ -109,7 +109,7 @@ class UnshortenmeConnector(BaseConnector):
             action_result.add_data(data)
         if phantom.is_fail(ret_val):
             return action_result.get_status()
-        return action_result.set_status(phantom.APP_SUCCESS)
+        return action_result.set_status(phantom.APP_SUCCESS, 'Successfully unshortened the given URL')
 
     def handle_action(self, param):
         """Function that handles all the actions
