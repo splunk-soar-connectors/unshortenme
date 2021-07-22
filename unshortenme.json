@@ -3,18 +3,22 @@
     "name": "unshorten.me",
     "description": "This app integrates with the unshorten.me service to expand shortened URLs",
     "type": "information",
-    "publisher": "Phantom",
-    "main_module": "unshortenme_connector.pyc",
-    "app_version": "1.0.6",
-    "utctime_updated": "2018-01-26T00:50:59.000000Z",
+    "publisher": "Splunk",
+    "main_module": "unshortenme_connector.py",
+    "app_version": "2.0.1",
+    "utctime_updated": "2021-07-19T05:57:39.000000Z",
     "package_name": "phantom_unshortenme",
     "product_vendor": "Unshorten.me",
     "product_name": "Unshorten.me",
     "product_version_regex": ".*",
-    "min_phantom_version": "3.0.247",
+    "min_phantom_version": "4.9.39220",
+    "python_version": "3",
+    "latest_tested_versions": [
+        "Cloud, Tested on 16th July, 2021"
+    ],
     "logo": "logo_unshortenme.svg",
     "logo_dark": "logo_unshortenme_dark.svg",
-    "license": "Copyright (c) Phantom Cyber Corporation, 2017-2018",
+    "license": "Copyright (c) 2017-2021 Splunk Inc.",
     "configuration": {},
     "actions": [
         {
@@ -42,7 +46,8 @@
                         "url",
                         "domain"
                     ],
-                    "primary": true
+                    "primary": true,
+                    "order": 0
                 }
             },
             "render": {
@@ -74,7 +79,11 @@
                 },
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.success",
@@ -102,6 +111,17 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.remaining_calls",
+                    "data_type": "numeric",
+                    "example_values": [
+                        9
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
                 }
             ],
             "versions": "EQ(*)"
