@@ -13,12 +13,10 @@
 # either express or implied. See the License for the specific language governing permissions
 # and limitations under the License.
 import phantom.app as phantom  # noqa
-
 import requests  # noqa
 from bs4 import BeautifulSoup  # noqa
-
-from phantom.base_connector import BaseConnector  # noqa
 from phantom.action_result import ActionResult  # noqa
+from phantom.base_connector import BaseConnector  # noqa
 
 UNSHORTEN_ME_BASE_URL = 'https://unshorten.me/json/'
 
@@ -66,7 +64,7 @@ class UnshortenmeConnector(BaseConnector):
             except Exception as e:
                 error_text = 'Cannot parse error details: {}'.format(e.msg)
 
-            message =  ('Error response from server. Status code: {0}'
+            message = ('Error response from server. Status code: {0}'
                        'Response: \n{1}\n').format(res.status_code, error_text)
             return action_result.set_status(phantom.APP_ERROR, message), None
 
@@ -139,9 +137,10 @@ class UnshortenmeConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import sys
-    import pudb
     import json
+    import sys
+
+    import pudb
 
     pudb.set_trace()
 
