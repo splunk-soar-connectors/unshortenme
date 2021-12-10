@@ -5,15 +5,15 @@
     "type": "information",
     "publisher": "Splunk",
     "main_module": "unshortenme_connector.py",
-    "app_version": "2.0.1",
-    "utctime_updated": "2021-07-19T05:57:39.000000Z",
+    "app_version": "2.0.2",
+    "utctime_updated": "2021-12-10T21:11:27.000000Z",
     "package_name": "phantom_unshortenme",
     "product_vendor": "Unshorten.me",
     "product_name": "Unshorten.me",
     "product_version_regex": ".*",
     "min_phantom_version": "4.9.39220",
     "python_version": "3",
-    "fips_compliant":true,
+    "fips_compliant": true,
     "latest_tested_versions": [
         "Cloud, Tested on 16th July, 2021"
     ],
