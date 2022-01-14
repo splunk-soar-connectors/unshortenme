@@ -1,6 +1,6 @@
 # File: unshortenme_connector.py
 #
-# Copyright (c) 2017-2021 Splunk Inc.
+# Copyright (c) 2017-2022 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ class UnshortenmeConnector(BaseConnector):
             params = {}
 
         try:
-            res = requests.get(url, params=params)
+            res = requests.get(url, params=params, timeout=30)
             res.raise_for_status()
         except requests.exceptions.HTTPError:
             # a status code outside of the 200s occured
@@ -155,4 +155,4 @@ if __name__ == '__main__':
 
         print(result)
 
-    exit(0)
+    sys.exit(0)
