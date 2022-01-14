@@ -30,7 +30,7 @@ class UnshortenmeConnector(BaseConnector):
             params = {}
 
         try:
-            res = requests.get(url, params=params)
+            res = requests.get(url, params=params, timeout=30)
             res.raise_for_status()
         except requests.exceptions.HTTPError:
             # a status code outside of the 200s occured
@@ -155,4 +155,4 @@ if __name__ == '__main__':
 
         print(result)
 
-    exit(0)
+    sys.exit(0)
