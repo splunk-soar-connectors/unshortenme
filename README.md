@@ -2,7 +2,7 @@
 # unshorten\.me
 
 Publisher: Splunk  
-Connector Version: 2\.0\.2  
+Connector Version: 2\.0\.4  
 Product Vendor: Unshorten\.me  
 Product Name: Unshorten\.me  
 Product Version Supported (regex): "\.\*"  
