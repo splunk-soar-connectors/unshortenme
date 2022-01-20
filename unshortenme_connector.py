@@ -1,16 +1,22 @@
 # File: unshortenme_connector.py
-# Copyright (c) 2017-2021 Splunk Inc.
 #
-# SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
-# without a valid written license from Splunk Inc. is PROHIBITED.
-
+# Copyright (c) 2017-2022 Splunk Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied. See the License for the specific language governing permissions
+# and limitations under the License.
 import phantom.app as phantom  # noqa
-
 import requests  # noqa
 from bs4 import BeautifulSoup  # noqa
-
-from phantom.base_connector import BaseConnector  # noqa
 from phantom.action_result import ActionResult  # noqa
+from phantom.base_connector import BaseConnector  # noqa
 
 UNSHORTEN_ME_BASE_URL = 'https://unshorten.me/json/'
 
@@ -24,7 +30,7 @@ class UnshortenmeConnector(BaseConnector):
             params = {}
 
         try:
-            res = requests.get(url, params=params)
+            res = requests.get(url, params=params, timeout=30)
             res.raise_for_status()
         except requests.exceptions.HTTPError:
             # a status code outside of the 200s occured
@@ -58,7 +64,7 @@ class UnshortenmeConnector(BaseConnector):
             except Exception as e:
                 error_text = 'Cannot parse error details: {}'.format(e.msg)
 
-            message =  ('Error response from server. Status code: {0}'
+            message = ('Error response from server. Status code: {0}'
                        'Response: \n{1}\n').format(res.status_code, error_text)
             return action_result.set_status(phantom.APP_ERROR, message), None
 
@@ -131,9 +137,10 @@ class UnshortenmeConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import sys
-    import pudb
     import json
+    import sys
+
+    import pudb
 
     pudb.set_trace()
 
@@ -148,4 +155,4 @@ if __name__ == '__main__':
 
         print(result)
 
-    exit(0)
+    sys.exit(0)
