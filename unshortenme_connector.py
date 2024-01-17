@@ -102,12 +102,12 @@ class UnshortenmeConnector(BaseConnector):
     def _unshorten_url(self, param):
         action_result = self.add_action_result(ActionResult(param))
         url = param.get('url')
-
+        self.debug_print("Checking url prefix")
         if url.startswith('http://'):
             url = url[7:]
         elif url.startswith('https://'):
             url = url[8:]
-
+        self.debug_print("Making rest call for unshorten_url")
         ret_val, data = self._make_rest_call(action_result, url)
 
         if data is not None:
