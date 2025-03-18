@@ -19,7 +19,7 @@
     ],
     "logo": "logo_unshortenme.svg",
     "logo_dark": "logo_unshortenme_dark.svg",
-    "license": "Copyright (c) 2017-2024 Splunk Inc.",
+    "license": "Copyright (c) 2017-2025 Splunk Inc.",
     "configuration": {},
     "actions": [
         {
