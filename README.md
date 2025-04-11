@@ -1,7 +1,7 @@
 # unshorten.me
 
 Publisher: Splunk \
-Connector Version: 2.0.5 \
+Connector Version: 2.0.6 \
 Product Vendor: Unshorten.me \
 Product Name: Unshorten.me \
 Minimum Product Version: 4.9.39220
