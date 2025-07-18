@@ -59,7 +59,7 @@ class UnshortenmeConnector(BaseConnector):
                 split_lines = [x.strip() for x in split_lines if x.strip()]
                 error_text = "\n".join(split_lines)
             except Exception as e:
-                error_text = f"Cannot parse error details: {str(e)}"
+                error_text = f"Cannot parse error details: {e!s}"
 
             message = f"Error response from server. Status code: {res.status_code}Response: \n{error_text}\n"
             return action_result.set_status(phantom.APP_ERROR, message), None
