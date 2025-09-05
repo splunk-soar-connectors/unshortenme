@@ -1,23 +1,23 @@
 # unshorten.me
 
-Publisher: Splunk \
-Connector Version: 2.0.6 \
-Product Vendor: Unshorten.me \
-Product Name: Unshorten.me \
+Publisher: Splunk <br>
+Connector Version: 2.0.6 <br>
+Product Vendor: Unshorten.me <br>
+Product Name: Unshorten.me <br>
 Minimum Product Version: 4.9.39220
 
 This app integrates with the unshorten.me service to expand shortened URLs
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity. This action runs a quick query on the server to check the connection \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity. This action runs a quick query on the server to check the connection <br>
 [lookup url](#action-lookup-url) - Get the original URL from a shortened URL
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity. This action runs a quick query on the server to check the connection
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -32,7 +32,7 @@ No Output
 
 Get the original URL from a shortened URL
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
