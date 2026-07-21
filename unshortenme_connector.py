@@ -12,11 +12,14 @@
 # the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
 # either express or implied. See the License for the specific language governing permissions
 # and limitations under the License.
-import phantom.app as phantom  # noqa
+from urllib.parse import quote
+
+import phantom.app as phantom
 import requests
 from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
+
 
 UNSHORTEN_ME_BASE_URL = "https://unshorten.me/json/"
 
@@ -102,7 +105,7 @@ class UnshortenmeConnector(BaseConnector):
         elif url.startswith("https://"):
             url = url[8:]
         self.debug_print("Making rest call for unshorten_url")
-        ret_val, data = self._make_rest_call(action_result, url)
+        ret_val, data = self._make_rest_call(action_result, quote(url, safe=""))
 
         if data is not None:
             action_result.add_data(data)
