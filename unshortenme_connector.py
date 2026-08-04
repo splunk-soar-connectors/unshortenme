@@ -67,6 +67,10 @@ class UnshortenmeConnector(BaseConnector):
             message = f"Error response from server. Status code: {res.status_code}Response: \n{error_text}\n"
             return action_result.set_status(phantom.APP_ERROR, message), None
 
+        if not isinstance(data, dict):
+            message = f"Unexpected non-object JSON response from server (type: {type(data).__name__})"
+            return action_result.set_status(phantom.APP_ERROR, message), None
+
         if "error" in data:
             message = "API returned error: {}".format(data["error"])
             return action_result.set_status(phantom.APP_ERROR, message), data
