@@ -4,21 +4,23 @@ Publisher: Splunk <br>
 Connector Version: 2.0.8 <br>
 Product Vendor: Unshorten.me <br>
 Product Name: Unshorten.me <br>
-Minimum Product Version: 4.9.39220
+Minimum Product Version: 7.0.0
 
 This app integrates with the unshorten.me service to expand shortened URLs
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity. This action runs a quick query on the server to check the connection <br>
+[test connectivity](#action-test-connectivity) - test connectivity <br>
 [lookup url](#action-lookup-url) - Get the original URL from a shortened URL
 
 ## action: 'test connectivity'
 
-Validate the asset configuration for connectivity. This action runs a quick query on the server to check the connection
+test connectivity
 
 Type: **test** <br>
 Read only: **True**
+
+Basic test for app.
 
 #### Action Parameters
 
@@ -26,7 +28,12 @@ No parameters are required for this action
 
 #### Action Output
 
-No Output
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.status | string | | success failure |
+action_result.message | string | | |
+summary.total_objects | numeric | | 1 |
+summary.total_objects_successful | numeric | | 1 |
 
 ## action: 'lookup url'
 
@@ -45,18 +52,17 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
+action_result.status | string | | success failure |
+action_result.message | string | | |
 action_result.parameter.url | string | `url` `domain` | |
 action_result.data.\*.resolved_url | string | | |
-action_result.summary | string | | |
-action_result.status | string | | success failed |
-action_result.data.\*.success | boolean | | |
+action_result.data.\*.success | boolean | | True False |
 action_result.data.\*.usage_count | string | | |
 action_result.data.\*.error | string | | |
 action_result.data.\*.requested_url | string | `url` | |
-summary.total_objects | numeric | | |
-summary.total_objects_successful | numeric | | |
 action_result.data.\*.remaining_calls | numeric | | 9 |
-action_result.message | string | | |
+summary.total_objects | numeric | | 1 |
+summary.total_objects_successful | numeric | | 1 |
 
 ______________________________________________________________________
 
